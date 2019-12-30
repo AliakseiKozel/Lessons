@@ -30,9 +30,17 @@ public class Programs
          */
         persons.stream()
                .filter( p -> p.getAge() >= 18 )
-               .sorted( (p1, p2) -> p1.getName().compareTo( p2.getName() ) )           //сортировка без компаратора срабатывает только тогда,
-                                                // когда входящие объекты класса реализуют  интерфейс comparable и возвращает инт
+               .sorted( (p1, p2) -> p1.getName()
+               .compareTo( p2.getName() ) )        //сортировка без компаратора срабатывает только тогда,
+                                                    // когда входящие объекты класса реализуют  интерфейс comparable и возвращает инт
                .forEach( System.out::println );
+
+        double average = persons.stream()  //в переменную присваемваем поток
+               .filter( p -> p.getAge() >=18 ) // который отфильтрован по возрасту
+               .mapToInt( p -> p.getAge() ) //переведен из Персон в ИНТ
+               .average().getAsDouble(); // и подсчитано среднее арифметическое
+
+        System.out.println(average);
 
     }
 }
